@@ -58,7 +58,6 @@ rownames(mat.na) <- mat.na[,1]
 mat.na[,1] <- NULL
 
 f <- read.csv('analysis_data_files/all_chr_pair_contactcounts_final.txt', sep = '\t', header = F)
-#f <- read.csv('all_chr_pair_contactcounts.txt', sep = '\t', header = T)
 
 #select pairs based on top contributing chr pairs shown in figure in EOSRC and CRC
 colnames(f) <- c('pair','hct116','mcf7','pc3','panc1')
@@ -88,12 +87,11 @@ all.set <- rbind(coad.set, brca.set, paad.set, prad.set)
 p <- all.set %>%  ggplot(aes(x=contacts, y=chr_pair_counts)) +
   geom_point() +
   facet_wrap(. ~ cohort.x, scales = 'free') +
- stat_smooth(method = 'lm', se = F, linetype='dashed', aes(group=cohort.x)) +
-theme(panel.background = element_blank(), axis.line = element_line(),
+  stat_smooth(method = 'lm', se = F, linetype='dashed', aes(group=cohort.x)) +
+  theme(panel.background = element_blank(), axis.line = element_line(),
       axis.text = element_text(colour = 'black')) +
   geom_text(label=ifelse((all.set$chr_pair_counts > 200 & all.set$contacts > 25000), all.set$chr_pair, ''))
 
-p
 save_pheatmap_png <- function(x, filename, width=8, height=8, units='in', res = 300) {
   setEPS()
   postscript(filename, width = width, height = height)
