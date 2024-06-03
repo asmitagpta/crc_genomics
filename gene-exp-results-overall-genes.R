@@ -1,3 +1,5 @@
+# This code will estimate the gene expression profiles of fusion partner genes based on their asigned chromatin compartments
+
 library(tidyr)
 library(dplyr)
 library(stringr)
